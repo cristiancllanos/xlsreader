@@ -1,5 +1,12 @@
 package gl;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.List;
+
+import com.google.gdata.util.AuthenticationException;
+import com.google.gdata.util.ServiceException;
+
 import junit.framework.TestCase;
 
 public class MapperBeanTest extends TestCase {
@@ -15,25 +22,17 @@ public class MapperBeanTest extends TestCase {
 			{ "Mariana", "Paleo", "25555890", "La Valle 87 Ciudad" },
 			{ "Sandra", "Merino", "25667800", "Salta 33 GC" } };
 
-	public void testMapper() {
+	public void testMapper() throws AuthenticationException, MalformedURLException, IOException, ServiceException {
 
-//		MapperBean mb = new MapperBeanImpl();
-//
-//		String xlsUrl = "https://docs.google.com/spreadsheet/ccc?key=0Ap9dpq9vAeVtdEZZc0lyNV9fQk5kVlpyaFI3dXM4Mnc";
-//
-//		SourceMapping sp = new SourceMappingXLSFile(xlsUrl, Client.class);
-//
-//		ColumnMappingSetting cms1 = ColumnMappingSettingByNumber(1, "name");
-//		sp.addConf(cms1);
-//		ColumnMappingSetting cms2 = ColumnMappingSettingByNumber(2, "lastname");
-//		sp.addConf(cms2);
-//		ColumnMappingSetting cms3 = ColumnMappingSettingByNumber(3, "dni");
-//		sp.addConf(cms3);
-//		ColumnMappingSetting cms4 = ColumnMappingSettingByNumber(4, "address");
-//		sp.addConf(cms4);
-//
-//		List<Client> customers = mb.mapper(sp);
-//
+		//
+		String xlsUrlSource = "https://docs.google.com/spreadsheet/ccc?key=0Ap9dpq9vAeVtdEZZc0lyNV9fQk5kVlpyaFI3dXM4Mnc";
+		Class bean = Client.class;
+		String[][] settingMapping = {{"1","name"},{"2","lastname"},{"3","dni"},{"4","address"}};		
+		SourceMappingXLSFile sp = new SourceMappingXLSFile(xlsUrlSource, bean, settingMapping);
+
+		MapperBean mb = new MapperBean();
+		List<Client> customers = mb.mapper(sp);
+
 //		int indexClient = new Double(Math.random()*10D).intValue();
 //		Client c1 = customers.get(indexClient);
 //		String nameClientValie = customersValid[indexClient][0]; 
