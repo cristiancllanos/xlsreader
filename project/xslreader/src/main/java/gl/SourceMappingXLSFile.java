@@ -1,5 +1,7 @@
 package gl;
 
+import java.util.Map;
+
 /**
  * Clase para configurar el proceso de mapeo de objeto con el xls.
  * 
@@ -7,13 +9,16 @@ package gl;
  */
 public class SourceMappingXLSFile {
 
+	private String spreadsheet;
+
+
 	private String xlsUrlSource;
 	private Class bean;
-	private String[][] settingMapping;
+	private Map<String, String> settingMapping;
 
 	public SourceMappingXLSFile(String xlsUrlSource, Class bean,
-			String[][] settingMapping) {
-		this.xlsUrlSource = xlsUrlSource;
+			Map<String, String> settingMapping) {
+		this.xlsUrlSource = "https://spreadsheets.google.com/feeds/worksheets/0Ap9dpq9vAeVtdEZZc0lyNV9fQk5kVlpyaFI3dXM4Mnc/private/full";
 		this.bean = bean;
 		this.settingMapping = settingMapping;
 	}
@@ -34,12 +39,19 @@ public class SourceMappingXLSFile {
 		this.bean = bean;
 	}
 
-	public String[][] getSettingMapping() {
+	public Map<String, String> getSettingMapping() {
 		return settingMapping;
 	}
 
-	public void setSettingMapping(String[][] settingMapping) {
+	public void setSettingMapping(Map<String, String> settingMapping) {
 		this.settingMapping = settingMapping;
 	}
 
+	public String getSpreadsheet() {
+		return spreadsheet;
+	}
+	
+	public void setSpreadsheet(String spreadsheet) {
+		this.spreadsheet = spreadsheet;
+	}
 }
