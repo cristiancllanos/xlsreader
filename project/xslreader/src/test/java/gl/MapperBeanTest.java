@@ -38,7 +38,7 @@ public class MapperBeanTest extends TestCase {
 
 		Authentication auth = new Authentication();
 		auth.setUsername("cristiancllanos@gmail.com");
-		auth.setPassword("gl123456");
+		auth.setPassword("*****");
 		
 		MapperBean mb = new MapperBean();
 		List<Client> customers = mb.mapper(sp, auth);

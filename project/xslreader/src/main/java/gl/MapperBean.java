@@ -21,15 +21,13 @@ public class MapperBean {
 	public List<Client> mapper(SourceMappingXLSFile sp, Authentication auth)
 			throws IOException, ServiceException, InstantiationException, IllegalAccessException {
 
-		SpreadsheetService service = new SpreadsheetService(
-				"MySpreadsheetIntegration-v1");
+		SpreadsheetService service = new SpreadsheetService("MySpreadsheetIntegration-v1");
 		service.setUserCredentials(auth.getUsername(), auth.getPassword());
 
-		URL SPREADSHEET_FEED_URL = new URL(sp.getXlsUrlSource());
+		final URL SPREADSHEET_FEED_URL = new URL(sp.getXlsUrlSource());
 
 		// spreadsheet
-		WorksheetFeed feed = service.getFeed(SPREADSHEET_FEED_URL,
-				WorksheetFeed.class);
+		WorksheetFeed feed = service.getFeed(SPREADSHEET_FEED_URL, WorksheetFeed.class);
 		WorksheetEntry worksheetEntry = feed.getEntries().get(0);
 		URL listFeedUrl = worksheetEntry.getListFeedUrl();
 
@@ -45,20 +43,29 @@ public class MapperBean {
 			
 			Object object = sp.getBean().newInstance();
 			
-			int numeroCol = -1 ;
-			for (String nombreCol : entry.getCustomElements().getTags()) {
-				numeroCol++;
-				String valueCell = entry.getCustomElements().getValue(nombreCol);
+			int numberColumn = -1 ;
+			
+			for (String nameColumn : entry.getCustomElements().getTags()) {
 				
-				System.out.println("\t Col"+numeroCol+" " + nombreCol+"="+valueCell);
+				numberColumn++;
 				
-				String property = sp.getSettingMapping().get(numeroCol);
-				if(property==null)
-					property = sp.getSettingMapping().get(nombreCol);
+				String valueCell = entry.getCustomElements().getValue(nameColumn);
 				
+				System.out.println("\t Col"+numberColumn+" " + nameColumn+"="+valueCell);
+				
+				String property = sp.getSettingMapping().get(numberColumn);
+				
+				if(property==null){
+					property = sp.getSettingMapping().get(nameColumn);
+				}
 				
 				boolean isSetColumn = property!=null;
 				
+				if(isSetColumn){
+					
+					
+					
+				}
 				
 				
 			}
@@ -67,25 +74,6 @@ public class MapperBean {
 		}
 
 		return null;
-	}
-
-	public void bla() throws IOException, ServiceException {
-		String username = "cristian.llanos@gmail.com";
-		String password = "";
-		String spreadsheet = "Clientes";
-		SpreadsheetService service = new SpreadsheetService(
-				"MySpreadsheetIntegration-v1");
-		service.setUserCredentials(username, password);
-		FeedURLFactory factory = FeedURLFactory.getDefault();
-		SpreadsheetQuery spreadsheetQuery = new SpreadsheetQuery(
-				factory.getSpreadsheetsFeedUrl());
-		spreadsheetQuery.setTitleQuery(spreadsheet);
-		SpreadsheetFeed spreadsheetFeed = service.query(spreadsheetQuery,
-				SpreadsheetFeed.class);
-		List<SpreadsheetEntry> spreadsheets = spreadsheetFeed.getEntries();
-		
-		System.out.println(spreadsheets.size());
-		
 	}
 
 }
