@@ -1,33 +1,33 @@
 package gl;
 
 /**
- * 
- * Bean ejemplo para mapear un xls con un objeto.
- * 
- * @author Cristian Ceferino Llanos <cristian.llanos@globallogic.com>
+ * Client
  *
+ * Entity class.
+ *
+ * @author Cristian Ceferino Llanos <cristian.llanos@globallogic.com>
  */
 public class Client {
 
-	private String name;
-	private String lastname;
+	private String nombre;
+	private String apellido;
 	private String dni;
-	private String address;
+	private String direccion;
 
-	public String getName() {
-		return name;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public String getLastname() {
-		return lastname;
+	public String getApellido() {
+		return apellido;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 	public String getDni() {
@@ -38,12 +38,12 @@ public class Client {
 		this.dni = dni;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getDireccion() {
+		return direccion;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 
 }

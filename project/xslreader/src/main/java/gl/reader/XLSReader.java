@@ -3,9 +3,11 @@ package gl.reader;
 import gl.Authentication;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.google.gdata.client.spreadsheet.SpreadsheetService;
@@ -15,17 +17,51 @@ import com.google.gdata.data.spreadsheet.WorksheetEntry;
 import com.google.gdata.data.spreadsheet.WorksheetFeed;
 import com.google.gdata.util.ServiceException;
 
-public abstract class XLSReader<T> implements Iterator<T> {
+/**
+ * XLSReader
+ *
+ * Handler mapping of a XLS file to anything object.
+ * Offer a interface like iterator.
+ *
+ * @author Cristian Ceferino Llanos <cristian.llanos@globallogic.com>
+ *
+ * @param <T> same object type.
+ */
+public abstract class XLSReader<T> implements Iterable<T> {
 
-	List<T> entities = new ArrayList<T>();
+	private String key;
+	private Class<T> bean; 
+	private Authentication auth;
+	private List<T> entities = new ArrayList<T>();
 
-	public XLSReader(String key, Class<T> bean, Authentication auth) throws IOException, ServiceException, InstantiationException, IllegalAccessException {
+	public XLSReader(String key, Class<T> bean, Authentication auth) {
+		super();
+		this.key = key;
+		this.bean = bean;
+		this.auth = auth;
+	}
+
+	public MappingIterator<T> iterator() {
+		try {
+			mapping();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		return new MappingIterator<T>(entities);
+	}
+
+	private void mapping()
+	throws IOException, ServiceException, InstantiationException,
+			IllegalAccessException, SecurityException,
+			IllegalArgumentException, NoSuchMethodException,
+			NoSuchFieldException, InvocationTargetException {
 
 		SpreadsheetService service = new SpreadsheetService("MySpreadsheetIntegration-v1");
 
 		service.setUserCredentials(auth.getUsername(), auth.getPassword());
 
-		final String url = "https://docs.google.com/spreadsheet/ccc?key="+key;
+		final String url = "https://spreadsheets.google.com/feeds/worksheets/"+key+"/private/full";
 		final URL SPREADSHEET_FEED_URL = new URL(url);
 
 		WorksheetFeed feed = service.getFeed(SPREADSHEET_FEED_URL, WorksheetFeed.class);
@@ -41,23 +77,27 @@ public abstract class XLSReader<T> implements Iterator<T> {
 		}
 	}
 
-	protected T setValue(String value, String property, T entity){
-		//TODO: set value with reflection
+	protected T setValue(String value, String property, T entity)
+	throws SecurityException, NoSuchMethodException,
+			NoSuchFieldException, IllegalArgumentException,
+			IllegalAccessException, InvocationTargetException,
+			InstantiationException 
+	{
+		Field field = entity.getClass().getField(property);
+		Constructor constructor = field.getDeclaringClass().getConstructor(String.class);
+		Object valueObject = constructor.newInstance(value);
+		field.set(entity, valueObject);
+//		String nameSetMethod = "set" + property.substring(0, 1).toUpperCase() + property.substring(1, property.length());
+//		Method setMethod = entity.getClass().getMethod(nameSetMethod, field.getDeclaringClass());
+//		Object[] params = { valueObject };
+//		setMethod.invoke(entity, params);
 		return entity;
 	}
 	
-	protected abstract T mergeRowAndEntity(ListEntry listEntry, T entity);
+	protected abstract T mergeRowAndEntity(ListEntry listEntry, T entity)
+	throws SecurityException, IllegalArgumentException,
+			NoSuchMethodException, NoSuchFieldException,
+			IllegalAccessException, InvocationTargetException,
+			InstantiationException;
 	
-	public boolean hasNext(){
-		return true;
-	}
-
-	public T next(){
-		return null;
-	}
-
-	public void remove(){
-		
-	}
-
 }

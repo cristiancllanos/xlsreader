@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import junit.framework.TestCase;
+
 import com.google.gdata.util.AuthenticationException;
 import com.google.gdata.util.ServiceException;
-
-import junit.framework.TestCase;
 
 public class MapperBeanTest extends TestCase {
 
@@ -29,10 +29,10 @@ public class MapperBeanTest extends TestCase {
 		String url = "https://docs.google.com/spreadsheet/ccc?key=0Ap9dpq9vAeVtdEZZc0lyNV9fQk5kVlpyaFI3dXM4Mnc";
 		Class bean = Client.class;
 		Map<String, String> settingMapping = new HashMap<String, String>();
-		settingMapping.put("0", "name");
-		settingMapping.put("1", "lastname");
+		settingMapping.put("0", "nombre");
+		settingMapping.put("1", "apellido");
 		settingMapping.put("2", "dni");
-		settingMapping.put("3", "address");
+		settingMapping.put("3", "direccion");
 		
 		String[][] settingMapping2 = {
 				{"0", "name"},
@@ -43,9 +43,7 @@ public class MapperBeanTest extends TestCase {
 		
 		SourceMappingXLSFile sp = new SourceMappingXLSFile(url, bean, settingMapping);
 
-		Authentication auth = new Authentication();
-		auth.setUsername("cristiancllanos@gmail.com");
-		auth.setPassword("*****");
+		Authentication auth = new Authentication("cristiancllanos@gmail.com","****");
 		
 		MapperBean mb = new MapperBean(auth);
 		List<Client> customers = mb.mapper(sp);
