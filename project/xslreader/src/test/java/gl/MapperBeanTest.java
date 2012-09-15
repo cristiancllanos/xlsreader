@@ -34,14 +34,21 @@ public class MapperBeanTest extends TestCase {
 		settingMapping.put("2", "dni");
 		settingMapping.put("3", "address");
 		
+		String[][] settingMapping2 = {
+				{"0", "name"},
+				{"1", "lastname"},
+				{"2", "dni"},
+				{"3", "address"}
+		};
+		
 		SourceMappingXLSFile sp = new SourceMappingXLSFile(url, bean, settingMapping);
 
 		Authentication auth = new Authentication();
 		auth.setUsername("cristiancllanos@gmail.com");
 		auth.setPassword("*****");
 		
-		MapperBean mb = new MapperBean();
-		List<Client> customers = mb.mapper(sp, auth);
+		MapperBean mb = new MapperBean(auth);
+		List<Client> customers = mb.mapper(sp);
 
 //		int indexClient = new Double(Math.random()*10D).intValue();
 //		Client c1 = customers.get(indexClient);

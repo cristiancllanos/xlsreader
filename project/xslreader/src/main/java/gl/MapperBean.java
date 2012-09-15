@@ -16,9 +16,15 @@ import com.google.gdata.data.spreadsheet.WorksheetEntry;
 import com.google.gdata.data.spreadsheet.WorksheetFeed;
 import com.google.gdata.util.ServiceException;
 
-public class MapperBean {
+public class MapperBean<T> {
 
-	public List<Client> mapper(SourceMappingXLSFile sp, Authentication auth)
+	private Authentication auth;
+	
+	public MapperBean(Authentication auth){
+		this.auth = auth;
+	}
+	
+	public List<Client> mapper(SourceMappingXLSFile sp)
 			throws IOException, ServiceException, InstantiationException, IllegalAccessException {
 
 		SpreadsheetService service = new SpreadsheetService("MySpreadsheetIntegration-v1");
@@ -76,4 +82,16 @@ public class MapperBean {
 		return null;
 	}
 
+	/**
+	 * Mapea las filas del xls a objetos. Utiliza el nombre 
+	 * de las propiedades del bean para buscarlo 
+	 * como nombre de columna en el xls.
+	 * 
+	 * @param bean
+	 * @param auth
+	 * @return
+	 */
+	public List<T> mapper(Class<T> bean, Authentication auth){
+		return null;
+	}
 }
