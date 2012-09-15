@@ -14,6 +14,9 @@ public class Client {
 	private String dni;
 	private String direccion;
 
+	public Client(){
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}

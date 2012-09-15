@@ -1,9 +1,16 @@
 package gl;
 
+import gl.reader.ColumnNameToObjectProperties;
+import gl.reader.MappingIterator;
+import gl.reader.XLSReaderTest;
+
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gdata.client.spreadsheet.FeedURLFactory;
 import com.google.gdata.client.spreadsheet.SpreadsheetQuery;
@@ -81,17 +88,5 @@ public class MapperBean<T> {
 
 		return null;
 	}
-
-	/**
-	 * Mapea las filas del xls a objetos. Utiliza el nombre 
-	 * de las propiedades del bean para buscarlo 
-	 * como nombre de columna en el xls.
-	 * 
-	 * @param bean
-	 * @param auth
-	 * @return
-	 */
-	public List<T> mapper(Class<T> bean, Authentication auth){
-		return null;
-	}
+	
 }

@@ -20,8 +20,7 @@ public class XLSReaderTest extends TestCase {
 
 	private final String key = "0Ap9dpq9vAeVtdEZZc0lyNV9fQk5kVlpyaFI3dXM4Mnc";
 	private final Class<Client> bean = Client.class;
-	private final Authentication auth = new Authentication(
-			"cristiancllanos@gmail.com", "gl123456");
+	private final Authentication auth = new Authentication("cristiancllanos@gmail.com", "******");
 
 	private final String[][] customersValid = {
 			{ "Juan", "Fernandez", "30565890", "Alen 418 GC" },
@@ -47,7 +46,7 @@ public class XLSReaderTest extends TestCase {
 		mapping.put("direccion", "direccion");
 
 		ColumnNameToObjectProperties<Client> reader = new ColumnNameToObjectProperties<Client>(
-				key, mapping, Client.class, auth);
+				key, mapping, bean, auth);
 		MappingIterator<Client> mappingIterator = reader.iterator();
 		
 		List<Client> customers = new ArrayList<Client>();

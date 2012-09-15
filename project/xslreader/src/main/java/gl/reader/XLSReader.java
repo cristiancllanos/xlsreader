@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,14 +84,13 @@ public abstract class XLSReader<T> implements Iterable<T> {
 			IllegalAccessException, InvocationTargetException,
 			InstantiationException 
 	{
-		Field field = entity.getClass().getField(property);
-		Constructor constructor = field.getDeclaringClass().getConstructor(String.class);
+		Field field = entity.getClass().getDeclaredField(property);
+		Constructor constructor = field.getType().getConstructor(String.class);
 		Object valueObject = constructor.newInstance(value);
-		field.set(entity, valueObject);
-//		String nameSetMethod = "set" + property.substring(0, 1).toUpperCase() + property.substring(1, property.length());
-//		Method setMethod = entity.getClass().getMethod(nameSetMethod, field.getDeclaringClass());
-//		Object[] params = { valueObject };
-//		setMethod.invoke(entity, params);
+		String nameSetMethod = "set" + property.substring(0, 1).toUpperCase() + property.substring(1, property.length());
+		Method setMethod = entity.getClass().getMethod(nameSetMethod, field.getType());
+		Object[] params = { valueObject };
+		setMethod.invoke(entity, params);
 		return entity;
 	}
 	
