@@ -1,13 +1,10 @@
-package gl.reader;
+package gl.mapping.reader;
 
-import gl.Authentication;
+import gl.mapping.Authentication;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import com.google.gdata.data.spreadsheet.ListEntry;
-import com.google.gdata.util.ServiceException;
 
 /**
  * ColumnNumberToObjectProperties
@@ -23,21 +20,14 @@ public class ColumnNumberToObjectProperties<T> extends XLSReader<T> {
 
 	private Map<Integer, String> mapping;
 
-	public ColumnNumberToObjectProperties(String key,Map<Integer, String> mapping, Class<T> bean, Authentication auth)
-	throws IOException, ServiceException, InstantiationException,
-			IllegalAccessException, SecurityException,
-			IllegalArgumentException, NoSuchMethodException,
-			NoSuchFieldException, InvocationTargetException {
+	public ColumnNumberToObjectProperties(String key,
+			Map<Integer, String> mapping, Class<T> bean, Authentication auth) {
 		super(key, bean, auth);
 		this.mapping = mapping;
 	}
 
 	@Override
-	protected T mergeRowAndEntity(ListEntry listEntry, T entity)
-	throws SecurityException, IllegalArgumentException,
-			NoSuchMethodException, NoSuchFieldException,
-			IllegalAccessException, InvocationTargetException,
-			InstantiationException {
+	protected T mergeRowAndEntity(ListEntry listEntry, T entity) throws XLSReaderException {
 		int numberColumn = -1;
 		for (String nameColumn : listEntry.getCustomElements().getTags()) {
 			numberColumn++;

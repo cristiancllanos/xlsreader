@@ -1,4 +1,4 @@
-package gl.reader;
+package gl.mapping.reader;
 
 import java.util.Iterator;
 import java.util.List;

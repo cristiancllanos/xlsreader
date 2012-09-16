@@ -1,4 +1,4 @@
-package gl;
+package gl.mapping;
 
 public class Authentication {
 

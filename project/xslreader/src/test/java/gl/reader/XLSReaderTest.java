@@ -1,13 +1,13 @@
 package gl.reader;
 
-import gl.Authentication;
-import gl.Client;
+import gl.entities.Cliente;
+import gl.mapping.Authentication;
 import junit.framework.TestCase;
 
 public abstract class XLSReaderTest extends TestCase {
 
 	protected final String key = "0Ap9dpq9vAeVtdEZZc0lyNV9fQk5kVlpyaFI3dXM4Mnc";
-	protected Class<Client> bean = Client.class;
+	protected Class<Cliente> bean = Cliente.class;
 	protected final Authentication auth = new Authentication("cristiancllanos@gmail.com", "gl123456");
 
 	protected final String[][] customersValid = {

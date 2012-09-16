@@ -1,20 +1,20 @@
-package gl;
+package gl.entities;
 
 /**
- * Client
+ * Cliente
  *
  * Entity class.
  *
  * @author Cristian Ceferino Llanos <cristian.llanos@globallogic.com>
  */
-public class Client {
+public class Cliente {
 
 	private String nombre;
 	private String apellido;
 	private String dni;
 	private String direccion;
 
-	public Client(){
+	public Cliente(){
 	}
 	
 	public String getNombre() {

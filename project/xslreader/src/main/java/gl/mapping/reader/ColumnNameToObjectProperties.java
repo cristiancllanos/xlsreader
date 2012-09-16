@@ -1,6 +1,6 @@
-package gl.reader;
+package gl.mapping.reader;
 
-import gl.Authentication;
+import gl.mapping.Authentication;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -11,32 +11,26 @@ import com.google.gdata.util.ServiceException;
 
 /**
  * ColumnNameToObjectProperties
- *
- * Mapping a row with object.
- * It use the column name for mapping each property.
- *
+ * 
+ * Mapping a row with object. It use the column name for mapping each property.
+ * 
  * @author Cristian Ceferino Llanos <cristian.llanos@globallogic.com>
- *
- * @param <T> same object type.
+ * 
+ * @param <T>
+ *            same object type.
  */
 public class ColumnNameToObjectProperties<T> extends XLSReader<T> {
 
 	protected Map<String, String> mapping;
 
-	public ColumnNameToObjectProperties(String key, Map<String, String> mapping, Class<T> bean, Authentication auth)
-	throws IOException, ServiceException, InstantiationException,
-			IllegalAccessException, SecurityException, IllegalArgumentException, NoSuchMethodException, NoSuchFieldException, InvocationTargetException {
+	public ColumnNameToObjectProperties(String key,
+			Map<String, String> mapping, Class<T> bean, Authentication auth) {
 		super(key, bean, auth);
 		this.mapping = mapping;
 	}
 
 	@Override
-	protected T mergeRowAndEntity(ListEntry listEntry, T entity)
-	throws SecurityException, IllegalArgumentException,
-			NoSuchMethodException, NoSuchFieldException,
-			IllegalAccessException, InvocationTargetException,
-			InstantiationException 
-	{
+	protected T mergeRowAndEntity(ListEntry listEntry, T entity) throws XLSReaderException {
 		for (String nameColumn : listEntry.getCustomElements().getTags()) {
 			String value = listEntry.getCustomElements().getValue(nameColumn);
 			String property = mapping.get(nameColumn);
