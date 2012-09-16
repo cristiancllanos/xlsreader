@@ -33,12 +33,12 @@ public class PropertiesObjectAsColumnName<T> extends ColumnNameToObjectPropertie
 
 		super.mapping = new HashMap<String, String>();
 		
-		for (Field field : bean.getFields()) {
+		for (Field field : bean.getDeclaredFields()) {
 			String property = field.getName();
 			String nameSetMethod = "set" + property.substring(0, 1).toUpperCase() + property.substring(1, property.length());
 			boolean isAccessible = false;
 			try{
-				Method setMethod = bean.getClass().getMethod(nameSetMethod, field.getDeclaringClass());
+				Method setMethod = bean.getMethod(nameSetMethod, field.getType());
 				isAccessible = setMethod != null;
 			} catch (NoSuchMethodException e) {
 				isAccessible = false;

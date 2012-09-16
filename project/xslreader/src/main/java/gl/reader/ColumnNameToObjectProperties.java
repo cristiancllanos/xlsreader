@@ -4,7 +4,6 @@ import gl.Authentication;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Iterator;
 import java.util.Map;
 
 import com.google.gdata.data.spreadsheet.ListEntry;
