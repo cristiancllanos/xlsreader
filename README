@@ -1,1 +1,17 @@
 XLSReader
+
+Introduction
+XLSReader is a Java project for to convert spreadsheets Google Docs to java object.
+
+Usage
+It's pretty straightforward to start using xlsreader. All you need to do to get started is:
+
+String key = "0Ap9dpq9vAeVtdEZZc0lyNV9fQk5kVlpyaFI3dXM4Mnc"; //key of spreadsheets
+Authentication auth = new Authentication("juan@gmail.com", "*****"); // your gmail user
+Map<String, String> mapping = new HashMap<String, String>(); // mapping between spreadsheet and properties java object
+mapping.put("nombre", "nombre");
+mapping.put("apellido", "apellido");
+mapping.put("dni", "dni");
+mapping.put("direccion", "direccion");
+MappingEntityService<Cliente> mappingCliente = new MappingEntityService<Cliente>(key, Cliente.class, auth);
+List<Cliente> customers = mappingCliente.mapping(mapping); // result list
