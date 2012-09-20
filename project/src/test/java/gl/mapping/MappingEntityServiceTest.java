@@ -25,7 +25,7 @@ public class MappingEntityServiceTest extends TestCase {
 	public void test() throws XLSReaderException {
 
 		final String key = "0Ap9dpq9vAeVtdEZZc0lyNV9fQk5kVlpyaFI3dXM4Mnc";
-		final Authentication auth = new Authentication("juan@gmail.com", "*****");
+		final Authentication auth = new Authentication("xxxxxxxxx@gmail.com", "******");
 		
 		Map<String, String> mapping = new HashMap<String, String>();
 		mapping.put("nombre", "nombre");
