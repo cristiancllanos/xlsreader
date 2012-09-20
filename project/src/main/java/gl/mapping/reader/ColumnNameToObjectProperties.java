@@ -2,12 +2,9 @@ package gl.mapping.reader;
 
 import gl.mapping.Authentication;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import com.google.gdata.data.spreadsheet.ListEntry;
-import com.google.gdata.util.ServiceException;
 
 /**
  * ColumnNameToObjectProperties
