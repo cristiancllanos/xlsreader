@@ -55,7 +55,7 @@ public abstract class XLSReader<T> implements Iterable<T> {
 		
 			SpreadsheetService service = new SpreadsheetService("MySpreadsheetIntegration-v1");
 	
-			service.setUserCredentials(auth.getUsername(), auth.getPassword());
+			service.setUserCredentials(auth.getGmailuser(), auth.getGmailpass());
 	
 			final String url = "https://spreadsheets.google.com/feeds/worksheets/"+key+"/private/full";
 			final URL SPREADSHEET_FEED_URL = new URL(url);

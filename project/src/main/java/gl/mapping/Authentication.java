@@ -2,29 +2,29 @@ package gl.mapping;
 
 public class Authentication {
 
-	private String username;
-	private String password;
+	private String gmailuser;
+	private String gmailpass;
 
-	public Authentication(String username, String password) {
+	public Authentication(String gmailuser, String gmailpass) {
 		super();
-		this.username = username;
-		this.password = password;
+		this.gmailuser = gmailuser;
+		this.gmailpass = gmailpass;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getGmailuser() {
+		return gmailuser;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setGmailuser(String gmailuser) {
+		this.gmailuser = gmailuser;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getGmailpass() {
+		return gmailpass;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setGmailpass(String gmailpass) {
+		this.gmailpass = gmailpass;
 	}
 
 }

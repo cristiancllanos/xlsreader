@@ -6,9 +6,9 @@ public class AuthenticationUtils {
 
 	public static Authentication getAuthentication() {
 		if (auth == null) {
-			String username = System.getProperty("username");
-			String password = System.getProperty("password");
-			auth = new Authentication(username, password);
+			String gmailuser = System.getProperty("gmailuser");
+			String gmailpass = System.getProperty("gmailpass");
+			auth = new Authentication(gmailuser, gmailpass);
 		}
 		return auth;
 	}
