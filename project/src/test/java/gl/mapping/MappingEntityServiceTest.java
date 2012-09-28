@@ -11,6 +11,9 @@ import junit.framework.TestCase;
 
 public class MappingEntityServiceTest extends TestCase {
 
+	private final String key = "0Ap9dpq9vAeVtdEZZc0lyNV9fQk5kVlpyaFI3dXM4Mnc";
+	private Authentication auth = AuthenticationUtils.getAuthentication();
+
 	private final String[][] customersValid = {
 			{ "Juan", "Fernandez", "30565890", "Alen 418 GC" },
 			{ "Carlos", "Martinez", "27599890", "San Martin Guaymallen" },
@@ -24,9 +27,6 @@ public class MappingEntityServiceTest extends TestCase {
 
 	public void test() throws XLSReaderException {
 
-		final String key = "0Ap9dpq9vAeVtdEZZc0lyNV9fQk5kVlpyaFI3dXM4Mnc";
-		final Authentication auth = new Authentication("xxxxxxxxx@gmail.com", "******");
-		
 		Map<String, String> mapping = new HashMap<String, String>();
 		mapping.put("nombre", "nombre");
 		mapping.put("apellido", "apellido");
